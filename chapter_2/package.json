@@ -15,6 +15,6 @@
   },
 
   "devDependencies": {
-    "nodemon": "^10.9.2"
+    "nodemon": "^3.1.0"
   }
 }
