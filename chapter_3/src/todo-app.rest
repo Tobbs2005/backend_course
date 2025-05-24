@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### login a user /auth/login
-POST http://localhost:5001/auth/login
+sPOST http://localhost:5001/auth/login
 Content-Type: application/json
 
 {

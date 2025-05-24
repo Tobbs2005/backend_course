@@ -26,19 +26,41 @@ router.post('/register', (req, res) => {
 
         // create a token 
         const token = jwt.sign({id: result.lastInsertRowid}, process.env.JWT_SECRET, {expiresIn: '24h'});
-        res.json({ token })
+        res.json({ token });
 
     } catch (err) {
         console.log(err.message);
         res.sendStatus(503);
     }
-    
-    res.send(201);
 
 });
 
 router.post('/login', (req, res) => {
+    const {username, password} = req.body;
 
+    try {
+        const getUser = db.prepare(`SELECT * FROM users WHERE username = ?`);
+        const user = getUser.get(username);
+
+        if(!user) {
+            return res.status(404).send({message: "User not found"});
+        }
+
+        //user found
+        const passwordIsValid = bcrypt.compareSync(password, user.password);
+
+        if(!passwordIsValid) {
+            return res.status(401).send({message: "Invalid password"});
+        }
+
+        //sucessful authentication
+        const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '24h'});
+        res.json({token});
+
+    } catch (err) {
+        console.log(err.message);
+        res.sendStatus(503);
+    }
 });
 
 export default router;
