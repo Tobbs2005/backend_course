@@ -6,16 +6,41 @@ POST http://localhost:5001/auth/register
 Content-Type: application/json
 
 {
-    "username": "testemail@gmail.com",
+    "username": "testemail2@gmail.com",
     "password": "testpassword"
 }
 
 ### login a user /auth/login
-sPOST http://localhost:5001/auth/login
+POST http://localhost:5001/auth/login
 Content-Type: application/json
 
 {
-    "username": "testemail@gmail.com",
+    "username": "testemail2@gmail.com",
     "password": "testpassword"
 }
 
+### fetch all todos GET /todos (protected)
+GET http://localhost:5001/todos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ4MTcwNDY1LCJleHAiOjE3NDgyNTY4NjV9.uH9C5w97GuxjTMNm6qGWTlEQo15MrGKpdBvQaMp0rbs
+
+### create a todo POST /todos (protected)
+POST http://localhost:5001/todos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ4MTcwNDY1LCJleHAiOjE3NDgyNTY4NjV9.uH9C5w97GuxjTMNm6qGWTlEQo15MrGKpdBvQaMp0rbs
+Content-Type: application/json
+
+{
+    "task": "Test todo"
+}
+
+
+### update a todo PUT /todos/:id (protected)
+PUT http://localhost:5001/todos/3
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ4MTcwNDY1LCJleHAiOjE3NDgyNTY4NjV9.uH9C5w97GuxjTMNm6qGWTlEQo15MrGKpdBvQaMp0rbs
+
+{
+    "completed": 1
+}
+
+### delete a todo PUT /todos/:id (protected)
+DELETE http://localhost:5001/todos/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ4MTcwNDY1LCJleHAiOjE3NDgyNTY4NjV9.uH9C5w97GuxjTMNm6qGWTlEQo15MrGKpdBvQaMp0rbs
